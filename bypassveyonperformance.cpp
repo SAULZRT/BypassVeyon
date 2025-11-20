@@ -1,12 +1,13 @@
 #include <Windows.h>
 #include <iostream>
 
-
+HANDLE I = GetStdHandle(STD_OUTPUT_HANDLE);
 
 void bypass(){
 	//Modo usuario(No admin)
 	//Captaremos la Imagen del proceso veyon-worker.exe para terminarlo en bucle , asi evitaremos su regeneracion , esto no requiere usuario de admin
 	system("taskkill -f -IM veyon-worker.exe");
+	
 	system(
 		"start /min powershell -WindowStyle Hidden -Command \""
 		"$l1 = New-Object System.Net.Sockets.TcpListener(11100); $l1.Start();"
@@ -16,9 +17,10 @@ void bypass(){
 		"while($true){ Start-Sleep -Seconds 1 }"
 		"\""
 	);
-
-
-	std::cout << "Listener iniciado. Manteniendo ocupado el puerto..." << std::endl;
+	std::cout << "Ocupamos todos los puertos que usa veyon , no  cierre el software mantenlo por seguridad" << std::endl;
+	SetConsoleTextAttribute(I, 10);   // verde
+	std::cout << "Listener iniciado. Manteniendo los puertos que usa veyon ocupados" << std::endl;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 	while (true)
 	{
 		Sleep(1000);
