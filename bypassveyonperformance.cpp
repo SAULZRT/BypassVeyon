@@ -9,11 +9,14 @@ void bypass(){
 	system("taskkill -f -IM veyon-worker.exe");
 	system(
 		"start /min powershell -WindowStyle Hidden -Command \""
-		"$listener = New-Object System.Net.Sockets.TcpListener(11100);"
-		"$listener.Start();"
+		"$l1 = New-Object System.Net.Sockets.TcpListener(11100); $l1.Start();"
+		"$l2 = New-Object System.Net.Sockets.TcpListener(11101); $l2.Start();"
+		"$l3 = New-Object System.Net.Sockets.TcpListener(11102); $l3.Start();"
+		"$udp = New-Object System.Net.Sockets.UdpClient(11103);"
 		"while($true){ Start-Sleep -Seconds 1 }"
 		"\""
 	);
+
 
 	std::cout << "Listener iniciado. Manteniendo ocupado el puerto..." << std::endl;
 	while (true)
