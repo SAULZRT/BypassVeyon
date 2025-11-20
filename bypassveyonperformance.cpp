@@ -18,7 +18,7 @@ void bypass(){
 	std::cout << "Listener iniciado. Manteniendo ocupado el puerto..." << std::endl;
 	while (true)
 	{
-		
+		Sleep(1000);
 		system("taskkill -f -IM veyon-worker.exe");
 	}
 	//Otro metodo para bypassear seria hacer como un bucle de reinicio de red y reactivarla
